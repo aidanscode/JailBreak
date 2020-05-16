@@ -12,3 +12,11 @@ net.Receive("TeamSelection", function(len, ply)
     ply:SetTeam(selectedTeam)
   end
 end )
+
+function GM:PlayerChangedTeam(ply, oldTeam, newTeam)
+  local isSpectator = newTeam == TEAM_SPECTATORS['index']
+
+  if (ROUND_STATE == NOT_ENOUGH_PLAYERS and (not isSpectator)) then
+    AttemptToStartRound()
+  end
+end

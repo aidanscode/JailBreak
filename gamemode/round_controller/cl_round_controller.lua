@@ -1,2 +1,6 @@
---I will need this file but it's 1:30 am so for now I'm just gonna leave this hi variable as a placeholder
-local hi = 0
+--We don't know what the round state is when we join
+ROUND_STATE = ROUND_STATE or nil
+
+net.Receive("SendPlayerRoundState", function()
+  ROUND_STATE = net.ReadInt(4)
+end )

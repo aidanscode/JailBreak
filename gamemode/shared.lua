@@ -3,7 +3,7 @@ GM.Author = "Zee"
 GM.Website = "aidanmurphey.com"
 
 function GM:Initialize()
-
+ -- do stuff
 end
 
 --Round status constants

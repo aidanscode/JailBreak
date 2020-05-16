@@ -10,10 +10,13 @@ AddCSLuaFile("teams/teams.lua")
 include("teams/teams.lua")
 include("teams/sv_teams.lua")
 
-AddCSLuaFile("ui/team_selection.lua")
+AddCSLuaFile("ui/cl_team_selection.lua")
+
+AddCSLuaFile("ui/cl_hud.lua")
 
 function GM:PlayerInitialSpawn(ply)
   ply:SetTeam(TEAM_SPECTATORS['index'])
+  ply:SendRoundState()
 end
 
 function GM:PlayerSpawn(ply)
