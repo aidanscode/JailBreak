@@ -1,0 +1,5 @@
+jailbreak
+{
+	"title"		JailBreak"
+	"maps"		"^jb_|^ba_jail_"
+}
