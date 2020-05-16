@@ -14,10 +14,6 @@ function GM:HUDPaint()
     surface.SetTextColor(Color(255, 255, 0))
     surface.SetTextPos(35, 55)
     surface.DrawText(roundStateString)
-  else
-    surface.SetTextColor(Color(255, 255, 0))
-    surface.SetTextPos(35, 55)
-    surface.DrawText("Unknown")
   end
 
 end
