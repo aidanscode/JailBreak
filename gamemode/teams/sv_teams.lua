@@ -4,7 +4,7 @@ net.Receive("TeamSelection", function(len, ply)
                                       --Which is fine because the defined teams are indexed: 1, 2, 3
 
   --Make sure the selected team is a valid option before continuing
-  if (selectedTeam != TEAM_PRISONERS['index'] && selectedTeam != TEAM_GUARDS['index']) then
+  if (selectedTeam != TEAM_PRISONERS && selectedTeam != TEAM_GUARDS) then
     return end
 
   --Ignore team selection request if the user is not a spectator
@@ -14,7 +14,7 @@ net.Receive("TeamSelection", function(len, ply)
 end )
 
 function GM:PlayerChangedTeam(ply, oldTeam, newTeam)
-  local isSpectator = newTeam == TEAM_SPECTATORS['index']
+  local isSpectator = newTeam == TEAM_SPECTATORS
 
   if (ROUND_STATE == NOT_ENOUGH_PLAYERS and (not isSpectator)) then
     AttemptToStartRound()

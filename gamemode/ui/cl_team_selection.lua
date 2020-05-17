@@ -21,20 +21,20 @@ function showTeamSelectionMenu()
   Frame:MakePopup()
 
   local PrisonerButton = vgui.Create("DButton", Frame)
-  PrisonerButton:SetText(TEAM_PRISONERS['name'])
+  PrisonerButton:SetText(team.GetName(TEAM_PRISONERS))
   PrisonerButton:SetPos((width / 3) - 30, (height / 2) - 15)
   PrisonerButton:SetSize(60, 30)
   PrisonerButton.DoClick = function()
-    selectTeam(TEAM_PRISONERS['index'])
+    selectTeam(TEAM_PRISONERS)
     Frame:Close()
   end
 
   local GuardButton = vgui.Create("DButton", Frame)
-  GuardButton:SetText(TEAM_GUARDS['name'])
+  GuardButton:SetText(team.GetName(TEAM_GUARDS))
   GuardButton:SetPos((width * (2/3)) - 30, (height / 2) - 15)
   GuardButton:SetSize(60, 30)
   GuardButton.DoClick = function()
-    selectTeam(TEAM_GUARDS['index'])
+    selectTeam(TEAM_GUARDS)
     Frame:Close()
   end
 end

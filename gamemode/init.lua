@@ -15,7 +15,7 @@ AddCSLuaFile("ui/cl_team_selection.lua")
 AddCSLuaFile("ui/cl_hud.lua")
 
 function GM:PlayerInitialSpawn(ply)
-  ply:SetTeam(TEAM_SPECTATORS['index'])
+  ply:SetTeam(TEAM_SPECTATORS)
   ply:SendRoundState()
 end
 
