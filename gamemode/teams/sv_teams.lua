@@ -16,7 +16,7 @@ end )
 function GM:PlayerChangedTeam(ply, oldTeam, newTeam)
   local isSpectator = newTeam == TEAM_SPECTATORS
 
-  if (ROUND_STATE == NOT_ENOUGH_PLAYERS and (not isSpectator)) then
+  if (not isSpectator and ROUND_STATE == NOT_ENOUGH_PLAYERS) then
     AttemptToStartRound()
   end
 end

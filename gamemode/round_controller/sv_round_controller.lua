@@ -11,7 +11,8 @@ ROUND_MAX_LENGTH = 45 --45 seconds for development purposes
 ROUND_TIME_LEFT = 0
 
 function AttemptToStartRound()
-  if ROUND_STATE == NOT_ENOUGH_PLAYERS and player.GetCount() > 1 then --We're good to go!
+  local countNonSpectators = team.NumPlayers(TEAM_PRISONERS) + team.NumPlayers(TEAM_GUARDS)
+  if ROUND_STATE == NOT_ENOUGH_PLAYERS and countNonSpectators > 1 then --We're good to go!
     ChangeRoundState(STARTING)
   end
 end
