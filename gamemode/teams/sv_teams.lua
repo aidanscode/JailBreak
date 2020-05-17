@@ -20,3 +20,17 @@ function GM:PlayerChangedTeam(ply, oldTeam, newTeam)
     AttemptToStartRound()
   end
 end
+
+--I set the teams' acceptable spawn classes in teams.lua but that doesn't seem to work
+--Even though I set GM.TeamBased to true like the gmod wiki says to
+--So we're doing this manually for now
+function GM:PlayerSelectSpawn(ply)
+  local spawnPoints = nil
+  if (ply:IsPrisoner()) then
+    spawnPoints = ents.FindByClass("info_player_terrorist")
+  else
+    spawnPoints = ents.FindByClass("info_player_counterterrorist")
+  end
+
+  return spawnPoints[math.random(#spawnPoints)]
+end

@@ -10,9 +10,15 @@ TEAM_SPECTATORS = 1
 TEAM_PRISONERS = 2
 TEAM_GUARDS = 3
 
-team.SetUp(TEAM_SPECTATORS, "Spectators", Color(255, 255, 255))
-team.SetUp(TEAM_PRISONERS, "Prisoners", Color(255, 0, 0))
-team.SetUp(TEAM_GUARDS, "Guards", Color(0, 0, 255))
+function GM:CreateTeams()
+  team.SetUp(TEAM_SPECTATORS, "Spectators", Color(255, 255, 255))
+
+  team.SetUp(TEAM_PRISONERS, "Prisoners", Color(255, 0, 0))
+  team.SetSpawnPoint(TEAM_PRISONERS, "info_player_terrorist")
+
+  team.SetUp(TEAM_GUARDS, "Guards", Color(0, 0, 255))
+  team.SetSpawnPoint(TEAM_PRISONERS, "info_player_counterterrorist")
+end
 
 --Define some friendy helper functions
 local playerMeta = FindMetaTable("Player")
