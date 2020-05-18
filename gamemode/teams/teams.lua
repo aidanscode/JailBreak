@@ -42,20 +42,9 @@ function GetAllActivePlayers()
   return table.Add(prisoners, guards)
 end
 
-function GetAlivePrisoners()
+function GetAlivePlayersOnTeam(TEAM_CODE)
   local list = {}
-  for _, ply in pairs(team.GetPlayers(TEAM_PRISONERS)) do
-    if (ply:Alive()) then
-      table.insert(list, ply)
-    end
-  end
-
-  return list
-end
-
-function GetAliveGuards()
-  local list = {}
-  for _, ply in pairs(team.GetPlayers(TEAM_GUARDS)) do
+  for _, ply in pairs(team.GetPlayers(TEAM_CODE)) do
     if (ply:Alive()) then
       table.insert(list, ply)
     end

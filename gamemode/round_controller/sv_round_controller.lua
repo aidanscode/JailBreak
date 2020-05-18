@@ -18,8 +18,8 @@ end
 
 function ShouldRoundEnd()
   if ROUND_STATE ~= IN_PROGRESS then return end
-  local alivePrisoners = #GetAlivePrisoners()
-  local aliveGuards = #GetAliveGuards()
+  local alivePrisoners = #GetAlivePlayersOnTeam(TEAM_PRISONERS)
+  local aliveGuards = #GetAlivePlayersOnTeam(TEAM_GUARDS)
 
   --We'll also check the round timer here but I haven't implemented that yet
   --Now that I think about it, maybe this shouldn't check the round timer since that will end whenever it ends and automatically change the round state?
