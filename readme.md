@@ -12,6 +12,8 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 - Team models, team loadouts
 
+- Warden system
+
 - Weapon spawns
 
 - Ability to block off OP vents/areas
