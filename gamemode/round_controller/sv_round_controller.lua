@@ -6,8 +6,12 @@ ROUND_STATE = ROUND_STATE or NOT_ENOUGH_PLAYERS
 --ROUND_MAX_LENGTH = 600 --ten minutes
 ROUND_MAX_LENGTH = 45 --45 seconds for development purposes
 
---How much time is left in the current round? No round has started yet so we'll set this to 0
-ROUND_TIME_LEFT = 0
+--Identifier for timer managing time left in the round
+ROUND_TIMER_IDENTIFIER = "RoundTimer"
+
+--How much time is left in this round? In seconds
+ROUND_TIME_LEFT = ROUND_TIME_LEFT or 0
+
 
 function AttemptToStartRound()
   local countNonSpectators = team.NumPlayers(TEAM_PRISONERS) + team.NumPlayers(TEAM_GUARDS)
@@ -21,33 +25,54 @@ function ShouldRoundEnd()
   local alivePrisoners = #GetAlivePlayersOnTeam(TEAM_PRISONERS)
   local aliveGuards = #GetAlivePlayersOnTeam(TEAM_GUARDS)
 
-  --We'll also check the round timer here but I haven't implemented that yet
-  --Now that I think about it, maybe this shouldn't check the round timer since that will end whenever it ends and automatically change the round state?
-  --TBD
   if (aliveGuards == 0 or alivePrisoners == 0) then
+    timer.Remove(ROUND_TIMER_IDENTIFIER)
+    ROUND_TIME_LEFT = 0
     ChangeRoundState(ENDING)
   end
 end
 
+function CheckEnoughPlayers()
+  local activePlayers = #GetAllActivePlayers()
+  if (activePlayers == 0 and ROUND_STATE == NOT_ENOUGH_PLAYERS) then return false end --False but we're already in the right place so this ends here
+  if (activePlayers > 1) then return true end
+
+  --We don't have enough players
+  ChangeRoundState(NOT_ENOUGH_PLAYERS)
+  return false
+end
+
 util.AddNetworkString("SendPlayerRoundState")
-function ChangeRoundState(newRoundState)
+function ChangeRoundState(newRoundState, winner)
   ROUND_STATE = newRoundState
 
+  BroadcastRoundState()
+
+  if (ROUND_STATE == ENDING) then
+    hook.Call("RoundStateChange", nil, ROUND_STATE, winner)
+  else
+    hook.Call("RoundStateChange", nil, ROUND_STATE)
+  end
+end
+
+function BroadcastRoundState()
   net.Start("SendPlayerRoundState")
     net.WriteInt(ROUND_STATE, 4)
+    net.WriteInt(ROUND_TIME_LEFT, 32)
   net.Broadcast()
-
-  hook.Call("RoundStateChange", nil, ROUND_STATE)
 end
 
 local playerMeta = FindMetaTable("Player")
 function playerMeta:SendRoundState()
   net.Start("SendPlayerRoundState")
-    net.WriteInt(ROUND_STATE, 4) --4 bits, gives us a max value of 7
+    net.WriteInt(ROUND_STATE, 4)
+    net.WriteInt(ROUND_TIME_LEFT, 32)
   net.Send(self)
 end
 
 function CheckAffectsRoundState()
+  if (not CheckEnoughPlayers()) then return end
+
   if (ROUND_STATE == IN_PROGRESS) then
     ShouldRoundEnd()
   elseif (ROUND_STATE == NOT_ENOUGH_PLAYERS) then
@@ -56,7 +81,10 @@ function CheckAffectsRoundState()
 end
 
 function GM:PlayerDisconnected(ply)
-  CheckAffectsRoundState()
+  timer.Simple(1/2, function()
+    CheckAffectsRoundState()  --Need to delay this logic
+                              --because the player is still on the server when this function is called
+  end )
 end
 
 function GM:PostPlayerDeath(ply)

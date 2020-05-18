@@ -17,7 +17,10 @@ function GM:PlayerChangedTeam(ply, oldTeam, newTeam)
   local isSpectator = newTeam == TEAM_SPECTATORS
 
   if (not isSpectator and ROUND_STATE == NOT_ENOUGH_PLAYERS) then
-    timer.Simple(1, CheckAffectsRoundState)
+    timer.Simple(1, function()
+      CheckAffectsRoundState()  -- this is in a timer because ply:Team() is still oldTeam at this point
+                                -- need to delay our check so that ply:Team() returns the right val
+    end )
   end
 end
 
