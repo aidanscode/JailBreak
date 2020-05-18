@@ -17,7 +17,7 @@ function GM:PlayerChangedTeam(ply, oldTeam, newTeam)
   local isSpectator = newTeam == TEAM_SPECTATORS
 
   if (not isSpectator and ROUND_STATE == NOT_ENOUGH_PLAYERS) then
-    AttemptToStartRound()
+    timer.Simple(1, CheckAffectsRoundState)
   end
 end
 
@@ -32,5 +32,18 @@ function GM:PlayerSelectSpawn(ply)
     spawnPoints = ents.FindByClass("info_player_counterterrorist")
   end
 
-  return spawnPoints[math.random(#spawnPoints)]
+  if (#spawnPoints == 0) then
+    return ents.FindByClass("info_player_start")[1]
+  else
+    return spawnPoints[math.random(#spawnPoints)]
+  end
+end
+
+local playerMeta = FindMetaTable("Player")
+function playerMeta:EmulateRespawn()
+  if (self:Alive()) then
+    self:KillSilent()
+  end
+  self:UnSpectate()
+  self:Spawn()
 end

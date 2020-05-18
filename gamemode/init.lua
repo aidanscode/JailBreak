@@ -5,6 +5,7 @@ include("shared.lua")
 
 AddCSLuaFile("round_controller/cl_round_controller.lua")
 include("round_controller/sv_round_controller.lua")
+include("round_controller/sv_round_state_change_handler.lua")
 
 AddCSLuaFile("teams/teams.lua")
 include("teams/teams.lua")

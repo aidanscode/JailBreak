@@ -34,3 +34,32 @@ end
 function playerMeta:IsGuard()
   return self:Team() == TEAM_GUARDS
 end
+
+function GetAllActivePlayers()
+  local prisoners = team.GetPlayers(TEAM_PRISONERS)
+  local guards = team.GetPlayers(TEAM_GUARDS)
+
+  return table.Add(prisoners, guards)
+end
+
+function GetAlivePrisoners()
+  local list = {}
+  for _, ply in pairs(team.GetPlayers(TEAM_PRISONERS)) do
+    if (ply:Alive()) then
+      table.insert(list, ply)
+    end
+  end
+
+  return list
+end
+
+function GetAliveGuards()
+  local list = {}
+  for _, ply in pairs(team.GetPlayers(TEAM_GUARDS)) do
+    if (ply:Alive()) then
+      table.insert(list, ply)
+    end
+  end
+
+  return list
+end
