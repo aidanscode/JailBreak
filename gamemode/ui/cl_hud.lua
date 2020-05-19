@@ -29,9 +29,5 @@ function GM:HUDPaint()
 end
 
 function FormatTime(timeInSeconds)
-  if (timeInSeconds < 3600) then
-    return string.FormattedTime(timeInSeconds, "%02i:%02i")
-  else
-    return string.FormattedTime(timeInSeconds, "%02i:%02i:%02i")
-  end
+  return string.FormattedTime(timeInSeconds, "%02i:%02i")
 end
