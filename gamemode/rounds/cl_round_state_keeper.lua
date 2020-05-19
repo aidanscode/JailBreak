@@ -1,4 +1,4 @@
---We don't know what the round state is when we join
+--We don't know what the round state is or how much time is left when we join, set them to nil and 0 respectively
 ROUND_STATE = ROUND_STATE or nil
 ROUND_TIME_LEFT = ROUND_TIME_LEFT or 0
 

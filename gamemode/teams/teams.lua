@@ -19,36 +19,3 @@ function GM:CreateTeams()
   team.SetUp(TEAM_GUARDS, "Guards", Color(51, 51, 255))
   team.SetSpawnPoint(TEAM_PRISONERS, "info_player_counterterrorist")
 end
-
---Define some friendy helper functions
-local playerMeta = FindMetaTable("Player")
-
-function playerMeta:IsSpectator()
-  return self:Team() == TEAM_SPECTATORS
-end
-
-function playerMeta:IsPrisoner()
-  return self:Team() == TEAM_PRISONERS
-end
-
-function playerMeta:IsGuard()
-  return self:Team() == TEAM_GUARDS
-end
-
-function GetAllActivePlayers()
-  local prisoners = team.GetPlayers(TEAM_PRISONERS)
-  local guards = team.GetPlayers(TEAM_GUARDS)
-
-  return table.Add(prisoners, guards)
-end
-
-function GetAlivePlayersOnTeam(TEAM_CODE)
-  local list = {}
-  for _, ply in pairs(team.GetPlayers(TEAM_CODE)) do
-    if (ply:Alive()) then
-      table.insert(list, ply)
-    end
-  end
-
-  return list
-end

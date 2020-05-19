@@ -8,7 +8,7 @@ local function NotEnoughPlayers()
 
   --Respawn anyone not alive
   for _, ply in pairs(GetAllActivePlayers()) do
-    ply:EmulateRespawn()
+    ply:ForceRespawn()
   end
 end
 
@@ -20,7 +20,7 @@ local function Starting()
   ROUND_TIME_LEFT = ROUND_MAX_LENGTH
 
   for _, ply in pairs(GetAllActivePlayers()) do
-    ply:EmulateRespawn()
+    ply:ForceRespawn()
     ply:Give("weapon_stunstick")
   end
 

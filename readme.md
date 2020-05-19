@@ -4,9 +4,9 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 ### Next Steps (In Order):
 
-- Code cleanup/reorganization
-
 - Team models, team loadouts
+
+- Auto team balancing on round start
 
 - Warden system
 

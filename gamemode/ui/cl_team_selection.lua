@@ -1,4 +1,4 @@
-function selectTeam(team)
+local function selectTeam(team)
   net.Start("TeamSelection")
     net.WriteInt(team, 3)
   net.SendToServer()
