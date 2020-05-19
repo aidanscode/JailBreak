@@ -4,10 +4,6 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 ### Next Steps (In Order):
 
-- Handle one team winning over the other
-
-  - This is ready to be done. A 'winner' parameter already exists, I'm just not using it
-
 - Code cleanup/reorganization
 
 - Team models, team loadouts

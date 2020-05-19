@@ -12,7 +12,6 @@ include("teams/teams.lua")
 include("teams/sv_teams.lua")
 
 AddCSLuaFile("ui/cl_team_selection.lua")
-
 AddCSLuaFile("ui/cl_hud.lua")
 
 function GM:PlayerInitialSpawn(ply)

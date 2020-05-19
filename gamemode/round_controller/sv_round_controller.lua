@@ -26,15 +26,24 @@ function ShouldRoundEnd()
   local aliveGuards = #GetAlivePlayersOnTeam(TEAM_GUARDS)
 
   if (aliveGuards == 0 or alivePrisoners == 0) then
+    --The round is over, move timer to 0 and end
     timer.Remove(ROUND_TIMER_IDENTIFIER)
     ROUND_TIME_LEFT = 0
-    ChangeRoundState(ENDING)
+
+    --Figure out who won (if anyone)
+    local winner = false
+    if (aliveGuards > alivePrisoners) then
+      winner = TEAM_GUARDS
+    elseif (alivePrisoners > aliveGuards) then
+      winner = TEAM_PRISONERS
+    end
+    ChangeRoundState(ENDING, winner)
   end
 end
 
 function CheckEnoughPlayers()
   local activePlayers = #GetAllActivePlayers()
-  if (activePlayers == 0 and ROUND_STATE == NOT_ENOUGH_PLAYERS) then return false end --False but we're already in the right place so this ends here
+  if (activePlayers < 2 and ROUND_STATE == NOT_ENOUGH_PLAYERS) then return false end --False but we're already in the right place so this ends here
   if (activePlayers > 1) then return true end
 
   --We don't have enough players
