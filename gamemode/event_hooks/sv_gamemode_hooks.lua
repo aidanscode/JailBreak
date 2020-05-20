@@ -7,6 +7,9 @@ function GM:PlayerSpawn(ply)
   if (ply:IsSpectator()) then
     ply:Spectate(OBS_MODE_ROAMING)
     ply:ConCommand("select_team")
+  else
+    ply:SetTeamModel()
+    ply:GiveTeamLoadout()
   end
 end
 

@@ -21,11 +21,12 @@ include("event_hooks/sv_gamemode_hooks.lua")
 AddCSLuaFile("ui/cl_hud.lua")
 AddCSLuaFile('ui/cl_team_selection.lua')
 
+--This allows me to easily add a bot to the game that I can test with
+--Only here for dev purposes, will be removed eventually
 local bot = nil
 hook.Add("PlayerSay", "erfg", function(ply, text)
   if (bot == nil) then
     bot = player.CreateNextBot(text)
-    bot:SetModel("models/player/alyx.mdl")
     bot:SetTeam(TEAM_PRISONERS)
   else
     bot:Kick(text)

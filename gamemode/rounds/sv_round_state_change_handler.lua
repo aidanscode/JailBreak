@@ -21,7 +21,6 @@ local function Starting()
 
   for _, ply in pairs(GetAllActivePlayers()) do
     ply:ForceRespawn()
-    ply:Give("weapon_stunstick")
   end
 
   timer.Simple(1, function()

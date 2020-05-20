@@ -60,4 +60,46 @@ if (SERVER) then
     self:Spawn()
   end
 
+  --[[
+    This function sets the model of a player based off of their team
+    Each team's possible models are defined in teams.lua
+  ]]--
+  function playerMeta:SetTeamModel()
+    local teamModels = {}
+
+    if (self:IsPrisoner()) then
+      teamModels = TEAM_PRISONERS_MODELS
+    else
+      teamModels = TEAM_GUARDS_MODELS
+    end
+
+    local numOptions = #teamModels
+    local selection = nil
+    if (numOptions == 1) then --Guards only have one choice as of now
+      selection = teamModels[1]
+    else
+      selection = teamModels[math.random(numOptions)]
+    end
+
+    if (selection != nil) then
+      self:SetModel(selection)
+    end
+  end
+
+  function playerMeta:GiveTeamLoadout()
+    local teamLoadout = {}
+
+    if (self:IsPrisoner()) then
+      teamLoadout = TEAM_PRISONERS_LOADOUT
+    else
+      teamLoadout = TEAM_GUARDS_LOADOUT
+    end
+
+    for weapon, chance in pairs(teamLoadout) do
+      if (math.random(chance) == 1) then
+        self:Give(weapon)
+      end
+    end
+  end
+
 end
