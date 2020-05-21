@@ -13,8 +13,8 @@ local function NotEnoughPlayers()
 end
 
 local function Starting()
+  AutoBalanceTeams()
   game.CleanUpMap()
-  --autoBalanceTeams()
 
   --Set the round timer (without starting)
   ROUND_TIME_LEFT = ROUND_MAX_LENGTH

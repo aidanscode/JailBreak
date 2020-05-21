@@ -15,20 +15,24 @@ include("teams/sv_teams.lua")
 AddCSLuaFile("utility/player_helpers.lua")
 include("utility/player_helpers.lua")
 include("utility/sv_round_helpers.lua")
+include("utility/sv_team_helpers.lua")
 
 include("event_hooks/sv_gamemode_hooks.lua")
 
 AddCSLuaFile("ui/cl_hud.lua")
 AddCSLuaFile('ui/cl_team_selection.lua')
 
---This allows me to easily add a bot to the game that I can test with
+--This allows me to easily add/remove bots
 --Only here for dev purposes, will be removed eventually
-local bot = nil
 hook.Add("PlayerSay", "erfg", function(ply, text)
-  if (bot == nil) then
-    bot = player.CreateNextBot(text)
-    bot:SetTeam(TEAM_PRISONERS)
-  else
-    bot:Kick(text)
-  end
+    if (text == 'newbot') then
+      local bot = player.CreateNextBot(text)
+      bot:SetTeam(TEAM_PRISONERS)
+    else
+      for _, v in pairs(player.GetAll()) do
+        if (v:Name() == text) then
+          v:Kick('get outa here')
+        end
+      end
+    end
 end )
