@@ -14,6 +14,8 @@ Just a small Garry's Mod gamemode I'm making for fun
 
   - Prevent player damage unless round state is IN_PROGRESS
 
+  - Players should not clip with members of their own team
+
 - Warden system
 
 - Weapon spawns
