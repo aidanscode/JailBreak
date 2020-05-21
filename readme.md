@@ -6,15 +6,7 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 - Quick bugs/todos
 
-  - Players should not be able to do damage to their teammates
-
-  - Players should be able to use flashlights
-
-  - Prevent player suicide (kill in console) unless one prisoner is alive
-
-  - Prevent player damage unless round state is IN_PROGRESS
-
-  - Players should not clip with members of their own team
+  - Round won't end if a player joins mid-round
 
 - Warden system
 

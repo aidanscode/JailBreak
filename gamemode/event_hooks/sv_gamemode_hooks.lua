@@ -1,5 +1,6 @@
 function GM:PlayerInitialSpawn(ply)
   ply:SetTeam(TEAM_SPECTATORS)
+  ply:SetNoCollideWithTeammates(true)
   ply:SendRoundState()
 end
 
@@ -8,6 +9,7 @@ function GM:PlayerSpawn(ply)
     ply:Spectate(OBS_MODE_ROAMING)
     ply:ConCommand("select_team")
   else
+    ply:AllowFlashlight(true)
     ply:SetTeamModel()
     ply:GiveTeamLoadout()
   end
@@ -27,10 +29,10 @@ function GM:PlayerSelectSpawn(ply)
   end
 
   if (#spawnPoints == 0) then
-    return ents.FindByClass("info_player_start")[1]
-  else
-    return spawnPoints[math.random(#spawnPoints)]
+    spawnPoints = ents.FindByClass("info_player_start")
   end
+
+  return spawnPoints[math.random(#spawnPoints)]
 end
 
 function GM:PlayerChangedTeam(ply, oldTeam, newTeam)
@@ -49,6 +51,7 @@ function GM:PostPlayerDeath(ply)
     ply:Spawn()
   elseif (ROUND_STATE ~= STARTING) then
     ply:Spectate(OBS_MODE_ROAMING)
+    ply:AllowFlashlight(false)
     CheckAffectsRoundState()
   end
 end
@@ -67,4 +70,24 @@ function GM:PlayerDisconnected(ply)
     CheckAffectsRoundState()  --Need to delay this function call
                               --because the player is still on the server when GM:PlayerDisconnected is called
   end )
+end
+
+function GM:CanPlayerSuicide(ply)
+  if (ROUND_STATE ~= IN_PROGRESS) then
+    return false
+  else
+    return #GetAlivePlayersOnTeam(TEAM_PRISONERS) == 1
+  end
+end
+
+function GM:PlayerShouldTakeDamage(ply, attacker)
+  if (ROUND_STATE ~= IN_PROGRESS) then
+    return false
+  else
+    if (attacker:IsPlayer()) then
+      return ply:Team() ~= attacker:Team()
+    else
+      return true
+    end
+  end
 end
