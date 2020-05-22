@@ -4,10 +4,6 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 ### Next Steps (In Order):
 
-- Quick bugs/todos
-
-  - Round won't end if a player joins mid-round
-
 - Warden system
 
 - Weapon spawns

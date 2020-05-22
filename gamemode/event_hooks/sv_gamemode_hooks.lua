@@ -6,12 +6,13 @@ end
 
 function GM:PlayerSpawn(ply)
   if (ply:IsSpectator()) then
+    if (ROUND_STATE ~= NOT_ENOUGH_PLAYERS) then
+      ply:KillSilent()
+    end
+
     ply:Spectate(OBS_MODE_ROAMING)
     ply:ConCommand("select_team")
   else
-    ply:AllowFlashlight(true)
-    ply:SetTeamModel()
-    ply:GiveTeamLoadout()
   end
 end
 

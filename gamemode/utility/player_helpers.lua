@@ -56,6 +56,11 @@ if (SERVER) then
     if (self:Alive()) then
       self:KillSilent()
     end
+
+    self:AllowFlashlight(true)
+    self:SetTeamModel()
+    self:GiveTeamLoadout()
+
     self:UnSpectate()
     self:Spawn()
   end
