@@ -22,6 +22,10 @@ include("event_hooks/sv_gamemode_hooks.lua")
 AddCSLuaFile("ui/cl_hud.lua")
 AddCSLuaFile('ui/cl_team_selection.lua')
 
+include("commands/sv_command_utilities.lua")
+include("commands/sv_commands.lua")
+
+
 --This allows me to easily add/remove bots
 --Only here for dev purposes, will be removed eventually
 hook.Add("PlayerSay", "erfg", function(ply, text)

@@ -92,3 +92,15 @@ function GM:PlayerShouldTakeDamage(ply, attacker)
     end
   end
 end
+
+function GM:PlayerSay(ply, text)
+  if (CommandUtils.IsCommand(text)) then
+    local name, args = CommandUtils.GetCommandBreakdown(text)
+    if (not name == false) then
+      Commands.AttemptToExecute(ply, name, args)
+    end
+
+    return "" --don't show message to anyone
+  end
+  return text
+end
