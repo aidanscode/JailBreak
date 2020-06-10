@@ -4,6 +4,8 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 ### Next Steps (In Order):
 
+- Remove F2 team selection menu that the game put there on its own
+
 - Weapon spawns
 
 - Ability to block off OP vents/areas
@@ -15,6 +17,8 @@ Just a small Garry's Mod gamemode I'm making for fun
 - Map rotation
 
 - Custom scoreboard (sorted by team)
+
+- Swap list
 
 ### Low Priority Next Steps (I'll get to them when I get to them)
 
