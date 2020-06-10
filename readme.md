@@ -4,10 +4,6 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 ### Next Steps (In Order):
 
-- Command system (Prereq to warden system because /warden command)
-
-- Warden system
-
 - Weapon spawns
 
 - Ability to block off OP vents/areas
