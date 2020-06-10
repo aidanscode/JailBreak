@@ -1,30 +1,40 @@
 function GM:HUDPaint()
   surface.SetDrawColor( 0, 0, 0, 225 )
   surface.DrawRect( 25, 25, 200, 65 )
-
-  local myTeam = LocalPlayer():Team()
-  surface.SetTextColor(team.GetColor(myTeam))
-  surface.SetTextPos(35, 30)
   surface.SetFont("Trebuchet24")
-  surface.DrawText(team.GetName(myTeam))
+
+  local wardenText = 'No Warden'
+  if (CURRENT_WARDEN != nil) then
+    wardenText = 'Warden: ' .. CURRENT_WARDEN:GetName()
+  end
+  surface.SetTextColor(255, 255, 0)
+  surface.SetTextPos(35, 30)
+  surface.DrawText(wardenText)
+
 
   if (ROUND_STATE != nil) then
     local roundStateString = ROUND_STATE_STRINGS[ROUND_STATE]
-
     surface.SetTextColor(Color(255, 255, 0))
     surface.SetTextPos(35, 55)
     surface.DrawText(roundStateString)
   end
 
-  local width = 125
-  local height = 32
-  surface.DrawRect((ScrW() / 2) - (width / 2), 25, width, height)
+  local centerWidth = 125
+  local centerHeight = 65
+  surface.DrawRect((ScrW() / 2) - (centerWidth / 2), 25, centerWidth, centerHeight)
 
   local formattedTime = FormatTime(ROUND_TIME_LEFT)
-  local xOffset = surface.GetTextSize(formattedTime) / 2
+  local timeXOffset = surface.GetTextSize(formattedTime) / 2
   surface.SetTextColor(Color(255, 255, 0))
-  surface.SetTextPos((ScrW() / 2) - xOffset, 30)
+  surface.SetTextPos((ScrW() / 2) - timeXOffset, 30)
   surface.DrawText(formattedTime)
+
+  local myTeam = LocalPlayer():Team()
+  local teamName = team.GetName(myTeam)
+  local teamXOffset = surface.GetTextSize(teamName) / 2
+  surface.SetTextColor(team.GetColor(myTeam))
+  surface.SetTextPos((ScrW() / 2) - teamXOffset, 55)
+  surface.DrawText(teamName)
 
 end
 

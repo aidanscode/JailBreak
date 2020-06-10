@@ -11,3 +11,6 @@ ROUND_TIMER_IDENTIFIER = "RoundTimer"
 
 --How much time is left in this round? In seconds
 ROUND_TIME_LEFT = ROUND_TIME_LEFT or 0
+
+--Who is the warden?
+CURRENT_WARDEN = CURRENT_WARDEN or nil

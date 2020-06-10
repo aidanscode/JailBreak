@@ -46,6 +46,19 @@ if (SERVER) then
     net.Broadcast()
   end
 
+  util.AddNetworkString("SendPlayerCurrentWarden")
+  function playerMeta:SendCurrentWarden()
+    net.Start("SendPlayerCurrentWarden")
+      net.WriteEntity(CURRENT_WARDEN)
+    net.Send(self)
+  end
+
+  function BroadcastCurrentWarden()
+    net.Start("SendPlayerCurrentWarden")
+      net.WriteEntity(CURRENT_WARDEN)
+    net.Broadcast()
+  end
+
   --[[
     This function "respawns" a player
     If the given player is already alive, they're silently killed then spawned
@@ -105,6 +118,13 @@ if (SERVER) then
         self:Give(weapon)
       end
     end
+  end
+
+  function playerMeta:MakeWarden()
+    self:SetModel(WARDEN_MODEL)
+    CURRENT_WARDEN = self
+    BroadcastCurrentWarden()
+    PrintMessage(HUD_PRINTTALK, self:GetName() .. ' is now the warden!')
   end
 
 end

@@ -2,6 +2,7 @@ function GM:PlayerInitialSpawn(ply)
   ply:SetTeam(TEAM_SPECTATORS)
   ply:SetNoCollideWithTeammates(true)
   ply:SendRoundState()
+  ply:SendCurrentWarden()
 end
 
 function GM:PlayerSpawn(ply)

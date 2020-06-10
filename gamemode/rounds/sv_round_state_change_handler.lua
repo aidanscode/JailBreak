@@ -18,6 +18,8 @@ local function Starting()
 
   --Set the round timer (without starting)
   ROUND_TIME_LEFT = ROUND_MAX_LENGTH
+  CURRENT_WARDEN = nil
+  BroadcastCurrentWarden()
 
   for _, ply in pairs(GetAllActivePlayers()) do
     ply:ForceRespawn()

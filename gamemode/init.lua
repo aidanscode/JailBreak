@@ -30,7 +30,7 @@ include("commands/sv_commands.lua")
 --Only here for dev purposes, will be removed eventually
 hook.Add("PlayerSay", "erfg", function(ply, text)
     if (text == 'newbot') then
-      local bot = player.CreateNextBot(text)
+      local bot = player.CreateNextBot(text .. '1')
       bot:SetTeam(TEAM_PRISONERS)
     else
       for _, v in pairs(player.GetAll()) do
