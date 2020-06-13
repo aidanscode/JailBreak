@@ -4,8 +4,6 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 ### Next Steps (In Order):
 
-- Remove F2 team selection menu that the game put there on its own
-
 - Weapon spawns
 
 - Ability to block off OP vents/areas
