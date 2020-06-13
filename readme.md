@@ -14,6 +14,10 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 - Map rotation
 
+  - With voting system? Maybe later
+
+- Improved automated message system (colored messages)
+
 - Custom scoreboard (sorted by team)
 
 - Swap list
