@@ -105,3 +105,11 @@ function GM:PlayerSay(ply, text)
   end
   return text
 end
+
+--We want to use the hook here instead of overriding the GM function
+--because there's no need for me to retype all that fancy freezing logic Garry already handled for me
+--we just need to know when it's frozen and save it
+hook.Add("OnPhysgunFreeze", "TrackSpawnEntityFreeze", function(weapon, physobj, ent, ply)
+  SpawnEntities.SaveNewEntity(ent)
+  ply:ChatPrint('Saved entity spawn!')
+end )

@@ -41,3 +41,44 @@ wardenCommand.handler = function(sender, args)
   sender:MakeWarden()
 end
 table.insert(Commands.commands, wardenCommand)
+
+local spawnCommand = {}
+spawnCommand.name = "spawn"
+spawnCommand.handler = function(sender, args)
+  if (not sender:HasWeapon("weapon_physgun")) then
+    sender:Give("weapon_physgun")
+  end
+
+  local entity = args[1]
+  local model = nil
+  if (entity == null) then
+    sender:ChatPrint('Please supply an entity to spawn')
+    return
+  end
+
+  if (not string.find(entity, "weapon")) then
+    model = entity
+    entity = 'prop_physics'
+  end
+
+  local trace = sender:GetEyeTrace()
+  if (trace.HitSky) then
+    sender:ChatPrint('You\'re looking at the sky, brother')
+  else
+    local pos = trace.HitPos
+    local ent = ents.Create(entity)
+
+    if (not IsValid(ent)) then
+      sender:ChatPrint('Invalid entity entered!')
+    else
+      ent:SetPos(pos)
+      if (model) then
+        ent:SetModel(model)
+      end
+
+      ent:Spawn()
+    end
+  end
+
+end
+table.insert(Commands.commands, spawnCommand)
