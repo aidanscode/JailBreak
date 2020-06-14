@@ -10,6 +10,10 @@ Just a small Garry's Mod gamemode I'm making for fun
 
 - Improved automated message system (colored messages)
 
+- Custom gamemode physics (jump height, walk speed, sprint speed, etc.)
+
+- All doors open automatically one minute into the round
+
 - Custom scoreboard (sorted by team)
 
 - Swap list
