@@ -64,3 +64,43 @@ function CheckAffectsRoundState()
     CheckEnoughPlayers()
   end
 end
+
+function DecrementRoundsLeft()
+  ROUNDS_LEFT_IN_MAP = ROUNDS_LEFT_IN_MAP - 1
+
+  local plural = 's'
+  local areOrIs = 'are'
+  if (ROUNDS_LEFT_IN_MAP == 1) then
+    plural = ''
+    areOrIs = 'is'
+  end
+
+  PrintMessage(HUD_PRINTTALK, 'There ' .. areOrIs .. ' ' .. ROUNDS_LEFT_IN_MAP .. ' round' .. plural .. ' left this map!')
+end
+
+function CheckCanRunAnotherRound()
+  if (ROUNDS_LEFT_IN_MAP > 0) then
+    return true
+  else
+    SwitchToRandomMap()
+    return false
+  end
+end
+
+function SwitchToRandomMap()
+  local availableMaps = Helpers.GetAvailableNextMaps()
+  local nextMap = ''
+  if (#availableMaps > 0) then
+    nextMap = Helpers.StripFileExtension(availableMaps[math.random(#availableMaps)])
+  else
+    nextMap = game.GetMap()
+  end
+
+  for i=1, 5 do
+    PrintMessage(HUD_PRINTTALK, 'Changing level to "' .. nextMap .. '" in 5 seconds...')
+  end
+
+  timer.Simple(5, function()
+    RunConsoleCommand("changelevel", nextMap)
+  end )
+end

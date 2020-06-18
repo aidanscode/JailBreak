@@ -14,3 +14,6 @@ ROUND_TIME_LEFT = ROUND_TIME_LEFT or 0
 
 --Who is the warden?
 CURRENT_WARDEN = CURRENT_WARDEN or nil
+
+--How many rounds are remaining on this map before a map change?
+ROUNDS_LEFT_IN_MAP = ROUNDS_LEFT_IN_MAP or 10

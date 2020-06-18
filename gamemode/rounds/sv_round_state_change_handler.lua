@@ -54,12 +54,15 @@ local function Ending(winner)
     PrintMessage(HUD_PRINTTALK, "The winner is: " .. team.GetName(winner))
   end
 
-  timer.Simple(5, function()
-    --Double check just in case the round state changed to NOT_ENOUGH_PLAYERS while this timer was waiting
-    if (ROUND_STATE == ENDING) then
-      ChangeRoundState(STARTING)
-    end
-  end )
+  DecrementRoundsLeft()
+  if (CheckCanRunAnotherRound()) then
+    timer.Simple(5, function()
+      --Double check just in case the round state changed to NOT_ENOUGH_PLAYERS while this timer was waiting
+      if (ROUND_STATE == ENDING) then
+        ChangeRoundState(STARTING)
+      end
+    end )
+  end
 end
 
 local function Dispatcher(newRoundState, winner)
